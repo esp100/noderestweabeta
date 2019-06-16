@@ -1,61 +1,33 @@
 require('./config/config');
 
 const express = require('express');
+const mongoose = require('mongoose');
+
 const app = express();
 
-
-
 const bodyParser = require('body-parser');
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
 // parse application/json
 app.use(bodyParser.json());
 
 
-//Servicios/Peticiones HTML de tipo GET POST PUT DELETE
+//importar las peticiones HTML
+app.use(require('./routes/usuario'));
 
-app.get('/usuario', function(req, res) {
-    res.json('get usuario');
-});
 
-app.post('/usuario', function(req, res) {
 
-    let body = req.body;
+//mongo, mongoose connection 
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true },
+    (err) => {
 
-    if (body.nombre === undefined) {
+        if (err) throw err;
 
-        res.status(400).json({
-            ok: false,
-            mensaje: "El nombre es un parametro necesario"
-                /** , err: errors */
-        });
+        console.log('Base de datos ONLINE');
 
-        console.log('post Usuario', Error);
-
-    } else {
-
-        res.json({
-            persona: body
-        });
-        console.log('post Usuario');
-
-    }
-});
-
-app.put('/usuario/:id', function(req, res) {
-    let id = req.params.id;
-
-    res.json({
-        id
     });
-    console.log('put Usuario');
-});
+mongoose.set('useCreateIndex', true);
 
-app.delete('/usuario', function(req, res) {
-    res.json('delete usuario');
-});
 
 
 app.listen(process.env.PORT, () => {
