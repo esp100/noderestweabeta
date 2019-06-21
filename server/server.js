@@ -12,8 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-//importar las peticiones HTML
-app.use(require('./routes/usuario'));
+//importar las rutas/peticiones HTML a partir de index js
+app.use(require('./routes/index'));
+
 
 
 
