@@ -24,7 +24,7 @@ process.env.CADUCIDAD_TOKEN = process.env.CADUCIDAD_TOKEN || 60 * 60 * 24 * 30 *
 //SEED de autenticación  
 //=============================
 // TODO: delete la wea opciones de tokens to produc
-process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
+process.env.SEED = process.env.SEED;
 
 //=============================
 //URL Base de Datos 
